@@ -117,3 +117,16 @@ export default {
     npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
     npx tailwindcss init -p // create tailwind.config.js and postcss.config.js
     npm install -D @tailwindcss/forms
+
+# Antdv install
+
+    npm i --save ant-design-vue@4.x
+    npm install babel-plugin-import --save-dev
+    npm install less less-loader --save-dev
+    npm install vue-cli-plugin-antd --save-dev
+
+# Antdv use
+
+    import { Button } from 'ant-design-vue';
+    import 'ant-design-vue/dist/antd.css';
+    app.use(Button);
