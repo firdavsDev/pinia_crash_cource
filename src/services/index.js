@@ -1,5 +1,6 @@
 import axios from "axios";
 import { message } from "ant-design-vue";
+import Cookies from "js-cookie";
 
 const service = axios.create({
   // baseURL: 'http://localhost:3000',
@@ -12,7 +13,7 @@ const service = axios.create({
 });
 
 service.interceptors.request.use((config) => {
-  config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
+  config.headers["Authorization"] = `Bearer ${Cookies.get("access_token")}`;
   return config;
 });
 

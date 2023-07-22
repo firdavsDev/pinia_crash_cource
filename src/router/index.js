@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import Cookies from "js-cookie";
 
 const routes = [
   {
@@ -32,7 +33,7 @@ const router = createRouter({
 // check if user is logged in before each route by checking meta.requiresAuth and redirect to login if not
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    const loggedIn = localStorage.getItem("access_token");
+    const loggedIn = Cookies.get("access_token");
     if (!loggedIn) {
       // name login route
       next({ name: "login" });

@@ -98,7 +98,6 @@ export default defineComponent({
       useAuthStore()
         .login(data)
         .then((res) => {
-          console.log(res);
           iconLoading.value = false;
           notification.open({
             message: "Welcome to the system",
@@ -109,7 +108,6 @@ export default defineComponent({
           router.push("/");
         })
         .catch((err) => {
-          console.log(err);
           notification.open({
             message: "Error",
             description: "Wrong username or password.",

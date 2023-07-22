@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 import AuthService from "@/services/auth.js";
+import Cookies from "js-cookie";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    token: localStorage.getItem("access_token") || "",
+    token: Cookies.get("access_token") || "",
     role: JSON.parse(localStorage.getItem("role")) || {},
   }),
   getters: {
@@ -24,7 +25,8 @@ export const useAuthStore = defineStore("auth", {
     logout() {
       this.access_token = "";
       this.role = {};
-      localStorage.removeItem("access_token");
+      // To remove the cookie
+      Cookies.remove("access_token");
       localStorage.removeItem("role");
     },
     async login(data) {
@@ -32,7 +34,8 @@ export const useAuthStore = defineStore("auth", {
         const response = await AuthService.login(data);
         this.access_token = response.access_token;
         this.role = response.role;
-        localStorage.setItem("access_token", response.access_token);
+        // To set the cookie
+        Cookies.set("access_token", response.access_token);
         localStorage.setItem("role", JSON.stringify(response.role));
         return response;
       } catch (error) {
